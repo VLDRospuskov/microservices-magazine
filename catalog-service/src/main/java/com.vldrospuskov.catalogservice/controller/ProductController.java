@@ -1,6 +1,7 @@
 package com.vldrospuskov.catalogservice.controller;
 
 import com.vldrospuskov.catalogservice.entity.Product;
+import com.vldrospuskov.catalogservice.exception.ProductNotFoundException;
 import com.vldrospuskov.catalogservice.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,10 @@ public class ProductController {
         return productService.findAllProducts();
     }
 
-//    @GetMapping("/{code}")
-//    public Product productByCode(@PathVariable String code) {
-//        return productService.findProductByCode(code)
-//                .orElseThrow(() -> new ProductNotFoundException("product failed"));
-//    }
+    @GetMapping("/{code}")
+    public Product productByCode(@PathVariable String code) {
+        return productService.findProductByCode(code)
+                .orElseThrow(() -> new ProductNotFoundException("product failed"));
+    }
+
 }
