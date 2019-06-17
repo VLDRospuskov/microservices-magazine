@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   postgresdb:
     image: postgres
     container_name: postgresdb
@@ -8,6 +9,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
   vault:
     image: vault
     container_name: vault
@@ -18,3 +20,13 @@ services:
     environment:
         VAULT_ADDR: "http://192.168.99.100:8200"
         VAULT_DEV_ROOT_TOKEN_ID: "934f9eae-31ff-a8ef-e1ca-4bea9e07aa09"
+
+  rabbitmq:
+    container_name: rabbitmq-server
+    image: 'rabbitmq:management'
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
